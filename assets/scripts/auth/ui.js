@@ -9,7 +9,7 @@ const signUpSuccess = function (response) {
   $('#sign-up-sec').hide()
   $('#sign-in-sec').show()
 
-  $('#content').text('Sign Up Successful: Please sign in')
+  $('#content').text('Sign Up Successful: Please Sign In')
 }
 
 const signUpFailure = function (event) {
@@ -41,6 +41,9 @@ const changeSuccess = function (response) {
   $('#content').text('Password Changed')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
+
+  $('#change-pass-sec').show()
+  $('#change-pass').hide()
 }
 
 const changeFailure = function (response) {
