@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Tic Tac Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -49,8 +49,52 @@
           <button type="button" id='sign-out'>SIGN OUT</button>
         </section>
 
-      </main>
+        <section>
+          <button type="button" id='create-game'>CREATE GAME</button>
+        </section>
 
+        <section id='index-game'>
+          <button type="button" id='all-games'>SHOW GAMES</button>
+          <button type="button" id="gameOverTrue">Finished Games</button>
+          <button type="button" id="gameOverFalse">UnFinished Games</button>
+        </section>
+
+        <section>
+          <form id="show-game-form">
+            <input required placeholder="Enter Game ID" type="text" name=games[_id]>
+            <button type="submit">Show Specific Game</button>
+          </form>
+        </section>
+
+        <section>
+          <form id="delete-game-form">
+            <input required placeholder="Enter Game ID" type="text" name=games[_id]>
+            <button type="submit">Delete Specific Game</button>
+          </form>
+        </section>
+
+        <section id="game-display">
+          <div class="container">
+            <div class="row">
+              <div data-cell-index='0' id="box0" class="col-4 col-lg-4 box alt-color">
+                <button type="button">PRESS</button>
+              </div>
+              <div data-cell-index='1' id="box1" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box2" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box3" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box4" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box5" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box6" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box7" class="col-4 col-lg-4 box alt-color"></div>
+              <div id="box8" class="col-4 col-lg-4 box alt-color"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="show-games">
+        </section>
+
+      </main>
 
     </body>
 </html>
