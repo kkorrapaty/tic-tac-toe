@@ -18,9 +18,13 @@ const signUpFailure = function (event) {
 }
 
 const signInSuccess = function (response) {
+  // console.log('SignIn Success')
+  // console.log(response)
+
   $('#sign-up-sec').hide()
-  $('#content').text(`Sign In Success: You are signed in as ${response.user.email}`)
-  $('#content').removeClass().addClass('success')
+  $('#email-content').text(`You are signed in as ${response.user.email}`)
+  $('#content').text('')
+  // $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 
   store.user = response.user
@@ -28,8 +32,15 @@ const signInSuccess = function (response) {
   $('#sign-out-sec').show() // show sign-out button
   $('#sign-in-sec').hide() // hide sign in section -- already signed in
 
+  $('#show-game-form').show()
+
+  $('#create-game').show() // show game
+  $('#index-game').show() // show index games
+
   $('#change-pass-sec').show() // show section to change password...
   $('#change-pass').hide() // ...but keep form part hidden until 'CHANGE PASSWORD' is clicked
+
+  $('#delete-game-form').show()
 }
 
 const signInFailure = function (response) {
@@ -52,8 +63,9 @@ const changeFailure = function (response) {
 }
 
 const signOutSuccess = function (data) {
-  $('#content').text('Sign Out Success')
-  $('#content').removeClass().addClass('success')
+  // $('#content').text('Sign Out Success')
+  // $('#content').removeClass().addClass('success')
+  $('#content').text('')
   $('form').trigger('reset')
 
   store.user = null // get rid of auth token
@@ -61,8 +73,17 @@ const signOutSuccess = function (data) {
   $('#sign-up-sec').show()
   $('#sign-in-sec').show()
 
+  $('#index-game').hide()
+  $('#create-game').hide()
+
+  $('#game-display').hide()
+  $('#show-games').hide()
+
   $('#change-pass-sec').hide()
   $('#sign-out-sec').hide()
+
+  $('#show-game-form').hide()
+  $('#delete-game-form').hide()
 }
 
 const signOutFailure = function (data) {

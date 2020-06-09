@@ -45,7 +45,7 @@ const onChangePWD = function (event) {
   // const form = event.target
   // const data = getForm(form)
   const data = createForm(event)
-  console.log(data)
+  // console.log(data)
 
   api.changePWD(data)
     .then(ui.changeSuccess)

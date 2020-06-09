@@ -62,9 +62,9 @@ const showGame = function (data) {
 }
 
 const deleteGame = function (data) {
-  console.log('IN API')
-  console.log(store)
-  console.log(data)
+  // console.log('IN API')
+  // console.log(store)
+  // console.log(data)
 
   return $.ajax({
     method: 'DELETE',
@@ -75,9 +75,9 @@ const deleteGame = function (data) {
   })
 }
 
-const inputVal = function (data) {
-  console.log('IN API')
-  console.log(store)
+const inputValX = function (data, over) {
+  // console.log('IN API')
+  // console.log(store)
   return $.ajax({
     method: 'PATCH',
     url: config.apiUrl + '/games/' + store.game._id,
@@ -87,10 +87,31 @@ const inputVal = function (data) {
     data: {
       game: {
         cell: {
-          index: 0,
+          index: store.id,
           value: 'x'
         },
-        over: false
+        over: over
+      }
+    }
+  })
+}
+
+const inputValO = function (data, over) {
+  // console.log('IN API')
+  // console.log(store)
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiUrl + '/games/' + store.game._id,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      game: {
+        cell: {
+          index: store.id,
+          value: 'o'
+        },
+        over: over
       }
     }
   })
@@ -102,6 +123,7 @@ module.exports = {
   gameFin,
   gameUnfin,
   showGame,
-  inputVal,
+  inputValX,
+  inputValO,
   deleteGame
 }

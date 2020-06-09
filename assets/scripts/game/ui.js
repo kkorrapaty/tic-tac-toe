@@ -5,16 +5,21 @@ const createGameSuccess = function (response) {
   // console.log('Inside UI:')
   // console.log(response)
 
-  const gameDisplay = (`
-    <button type="button">PRESS</button>
-    `)
-  $('#box0').html(gameDisplay)
+  store.gameBoard = []
+  store.count = 0
+
+  $('#content').text('')
+
+  for (let i = 0; i < 9; i++) {
+    $('#' + i).text('')
+  }
 
   $('form').trigger('reset')
-  $('#content').text('Game Made Success')
-  $('#content').removeClass().addClass('success')
+  // $('#content').text('Game Made Success')
+  // $('#content').removeClass().addClass('success')
 
   store.game = response.game
+  store.gameBoard = store.game.cells
   // console.log(store.game.cells)
 
   $('#game-display').show()
@@ -28,6 +33,7 @@ const createGameFailure = function () {
 const indexGameSuccess = function (response) {
   // console.log('Inside UI Index:')
   // console.log(response)
+  $('#content').text('')
 
   let gameDisplay = ''
 
@@ -43,7 +49,8 @@ const indexGameSuccess = function (response) {
   $('#show-games').html(gameDisplay)
 
   $('form').trigger('reset')
-  $('#content').text('Game Index Success')
+  $('#show-games').show()
+  // $('#content').text('Game Index Success')
   $('#content').removeClass().addClass('success')
 }
 
@@ -55,6 +62,7 @@ const indexGameFailure = function () {
 const gameFinSuccess = function (response) {
   // console.log('Inside Fin Success:')
   // console.log(response)
+  $('#content').text('')
 
   let gameDisplay = ''
 
@@ -69,7 +77,7 @@ const gameFinSuccess = function (response) {
 
   $('#show-games').html(gameDisplay)
 
-  $('#content').text('Game Finished Success')
+  // $('#content').text('Game Finished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -82,6 +90,7 @@ const gameFinFailure = function () {
 const gameUnfinSuccess = function (response) {
   // console.log('Inside Unfin Success:')
   // console.log(response)
+  $('#content').text('')
 
   let gameDisplay = ''
 
@@ -96,7 +105,7 @@ const gameUnfinSuccess = function (response) {
 
   $('#show-games').html(gameDisplay)
 
-  $('#content').text('Game Unfinished Success')
+  // $('#content').text('Game Unfinished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -109,6 +118,7 @@ const gameUnfinFailure = function () {
 const showGameSuccess = function (response) {
   // console.log('IN UI')
   // console.log(response)
+  $('#content').text('')
 
   const gameDisplay = (`
     <p>${response.game[0].cells} </p>
@@ -116,7 +126,7 @@ const showGameSuccess = function (response) {
     `)
   $('#show-games').html(gameDisplay)
 
-  $('#content').text('Show Game Success')
+  // $('#content').text('Show Game Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -127,10 +137,11 @@ const showGameFailure = function () {
 }
 
 const deleteGameSuccess = function (response) {
-  console.log('IN UI')
-  console.log(response)
+  // console.log('IN UI')
+  // console.log(response)
 
-  $('#content').text('Delete Game Success')
+  // $('#content').text('Delete Game Success')
+  $('#content').text('')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -140,18 +151,50 @@ const deleteGameFailure = function () {
   $('#content').removeClass().addClass('failure')
 }
 
-const inputValSuccess = function () {
-  const gameDisplay = (`
-    <p>x</p>
-    `)
-  $('#box0').html(gameDisplay)
+const inputValSuccessX = function (response) {
+  console.log('Inside Success X')
+  // console.log(response)
+  // console.log(store.id)
+  store.count += 1
+  store.gameBoard[store.id] = 'x'
 
-  $('#content').text('Input Val Success')
+  // const gameDisplay = (`
+  //   <p>x</p>
+  //   `)
+  $('#' + store.id).text('x')
+
+  // $('#content').text('Input Val Success')
+  $('#content').text('')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
 
-const inputValFailure = function () {
+const inputValFailureX = function () {
+  $('#content').text('Input Val Failed')
+  $('#content').removeClass().addClass('failure')
+}
+
+const inputValSuccessO = function (response) {
+  console.log('Inside Success O')
+  console.log(response)
+  console.log(store.id)
+
+  store.count++
+  store.gameBoard[store.id] = 'o'
+
+  // const gameDisplay = (`
+  //   <p>o</p>
+  //   `)
+  // $(store.id).innherHTML = gameDisplay
+  $('#' + store.id).text('o')
+
+  // $('#content').text('Input Val Success')
+  $('#content').text('Input O Success')
+  $('#content').removeClass().addClass('success')
+  $('form').trigger('reset')
+}
+
+const inputValFailureO = function () {
   $('#content').text('Input Val Failed')
   $('#content').removeClass().addClass('failure')
 }
@@ -167,8 +210,10 @@ module.exports = {
   gameUnfinFailure,
   showGameSuccess,
   showGameFailure,
-  inputValSuccess,
-  inputValFailure,
+  inputValSuccessX,
+  inputValFailureX,
+  inputValSuccessO,
+  inputValFailureO,
   deleteGameSuccess,
   deleteGameFailure
 }

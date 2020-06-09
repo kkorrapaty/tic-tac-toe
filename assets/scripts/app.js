@@ -35,5 +35,5 @@ $(() => {
   $('#delete-game-form').on('submit', eventsGame.onDeleteGame) // delete specific game
 
   // When box is clicked
-  $('#box0').on('click', eventsGame.onInputVal)
+  $('#game-display').on('click', eventsGame.onInputVal)
 })
