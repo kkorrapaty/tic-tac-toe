@@ -1,5 +1,6 @@
 'use strict'
 const store = require('../store')
+const eventsGame = require('./events')
 
 const createGameSuccess = function (response) {
   // console.log('Inside UI:')
@@ -119,12 +120,34 @@ const showGameSuccess = function (response) {
   // console.log('IN UI')
   // console.log(response)
   $('#content').text('')
+  console.log(response.game)
 
-  const gameDisplay = (`
-    <p>${response.game[0].cells} </p>
-    <br>
-    `)
-  $('#show-games').html(gameDisplay)
+  $('#game-display').show()
+  for (let i = 0; i < 9; i++) {
+    $('#' + i).text(response.game[0].cells[i])
+  }
+
+  if (!response.game[0].over) {
+    $('#show-games').text('Game is Not Over: Keep Playing!')
+    store.gameBoard = response.game[0].cells
+    store.gameBoard.oldId = response.game[0]._id
+    store.count = 0
+    store.gameBoard.forEach((i) => {
+      if (i === 'x') {
+        store.count++
+      }
+      if (i === 'o') {
+        store.count++
+      }
+    })
+
+    // store.game._id = response.game[0]._id
+    // const button = document.getElementById('game-display')
+    // button.on('click', eventsGame.onInputVal)
+    eventsGame.onInputVal()
+  } else {
+    $('#show-games').text('Game is Over!')
+  }
 
   // $('#content').text('Show Game Success')
   $('#content').removeClass().addClass('success')
@@ -156,12 +179,12 @@ const inputValSuccessX = function (response) {
   // console.log(response)
   // console.log(store.id)
   store.count += 1
-  store.gameBoard[store.id] = 'X'
+  store.gameBoard[store.id] = 'x'
 
   // const gameDisplay = (`
   //   <p>x</p>
   //   `)
-  $('#' + store.id).text('X')
+  $('#' + store.id).text('x')
 
   // $('#content').text('Input Val Success')
   // $('#content').text('')
@@ -181,13 +204,13 @@ const inputValSuccessO = function (response) {
   // console.log(store.id)
 
   store.count++
-  store.gameBoard[store.id] = 'O'
+  store.gameBoard[store.id] = 'o'
 
   // const gameDisplay = (`
   //   <p>o</p>
   //   `)
   // $(store.id).innherHTML = gameDisplay
-  $('#' + store.id).text('O')
+  $('#' + store.id).text('o')
 
   // $('#content').text('Input Val Success')
   // $('#content').text('')

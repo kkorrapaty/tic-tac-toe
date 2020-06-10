@@ -9,6 +9,8 @@ const signUpSuccess = function (response) {
   $('#sign-up-sec').hide()
   $('#sign-in-sec').show()
 
+  $('#decide').hide()
+
   $('#content').text('Sign Up Successful: Please Sign In')
 }
 
@@ -22,6 +24,9 @@ const signInSuccess = function (response) {
   // console.log(response)
 
   $('#sign-up-sec').hide()
+  $('#decide').hide()
+
+  $('#email-content').show()
   $('#email-content').text(`You are signed in as ${response.user.email}`)
   $('#content').text('')
   // $('#content').removeClass().addClass('success')
@@ -70,8 +75,10 @@ const signOutSuccess = function (data) {
 
   store.user = null // get rid of auth token
 
-  $('#sign-up-sec').show()
+  // $('#sign-up-sec').show()
   $('#sign-in-sec').show()
+
+  $('#decide').show()
 
   $('#email-content').hide()
 

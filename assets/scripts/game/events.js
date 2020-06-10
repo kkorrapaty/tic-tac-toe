@@ -61,11 +61,10 @@ const onDeleteGame = function (event) {
     .catch(ui.deleteGameFailure)
 }
 
-const onInputVal = function (event) {
-  let over
+const onInputVal = function () {
   // const data = createForm(event)
 
-  // console.log(data)
+  console.log(store)
 
   // let id
   const button = document.getElementById('game-display')
@@ -74,12 +73,12 @@ const onInputVal = function (event) {
   button.onclick = function (event) {
     // console.log(store.gameBoard)
     // console.log(event)
-
+    let over
     over = !(store.gameBoard.some(i => i === ''))
 
     // console.log(over)
-    const xWins = checkWin('X')
-    const oWins = checkWin('O')
+    const xWins = checkWin('x')
+    const oWins = checkWin('o')
 
     if (xWins || oWins) {
       for (let i = 0; i < 9; i++) {
@@ -89,7 +88,7 @@ const onInputVal = function (event) {
       $('#content').text(store.winner + ' WINS')
       alert(store.winner + ' WINS')
       over = true
-      if (store.winner === 'X') {
+      if (store.winner === 'x') {
         api.inputValX(over)
       } else {
         api.inputValO(over)
@@ -100,6 +99,10 @@ const onInputVal = function (event) {
 
     if (over) {
       alert('GAME OVER')
+      if ((!xWins) && (!oWins)) {
+        api.inputValX(over)
+        $('#content').text('Its A Draw')
+      }
     } else if (store.gameBoard[id] !== '') {
       alert('CANNOT MAKE THAT MOVE')
     } else {

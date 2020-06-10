@@ -77,9 +77,15 @@ const deleteGame = function (data) {
 
 const inputValX = function (over) {
   // console.log('IN API')
+  let id
+  if (store.game === undefined) {
+    id = store.gameBoard.oldId
+  } else {
+    id = store.game._id
+  }
   return $.ajax({
     method: 'PATCH',
-    url: config.apiUrl + '/games/' + store.game._id,
+    url: config.apiUrl + '/games/' + id,
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
@@ -98,9 +104,15 @@ const inputValX = function (over) {
 const inputValO = function (over) {
   // console.log('IN API')
   // console.log(store)
+  let id
+  if (store.game === undefined) {
+    id = store.gameBoard.oldId
+  } else {
+    id = store.game._id
+  }
   return $.ajax({
     method: 'PATCH',
-    url: config.apiUrl + '/games/' + store.game._id,
+    url: config.apiUrl + '/games/' + id,
     headers: {
       Authorization: 'Token token=' + store.user.token
     },

@@ -12,6 +12,10 @@ const createForm = function (event) {
   return getForm(form)
 }
 
+const onDecide = function (event) {
+  $('#sign-up-sec').show()
+}
+
 const onSignUp = function (event) {
   // event.preventDefault()
   // const form = event.target
@@ -65,5 +69,6 @@ module.exports = {
   onSignIn,
   onChangePWD,
   showChange,
-  onSignOut
+  onSignOut,
+  onDecide
 }
