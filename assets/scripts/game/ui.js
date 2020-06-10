@@ -152,16 +152,16 @@ const deleteGameFailure = function () {
 }
 
 const inputValSuccessX = function (response) {
-  console.log('Inside Success X')
+  // console.log('Inside Success X')
   // console.log(response)
   // console.log(store.id)
   store.count += 1
-  store.gameBoard[store.id] = 'x'
+  store.gameBoard[store.id] = 'X'
 
   // const gameDisplay = (`
   //   <p>x</p>
   //   `)
-  $('#' + store.id).text('x')
+  $('#' + store.id).text('X')
 
   // $('#content').text('Input Val Success')
   $('#content').text('')
@@ -175,21 +175,21 @@ const inputValFailureX = function () {
 }
 
 const inputValSuccessO = function (response) {
-  console.log('Inside Success O')
-  console.log(response)
-  console.log(store.id)
+  // console.log('Inside Success O')
+  // console.log(response)
+  // console.log(store.id)
 
   store.count++
-  store.gameBoard[store.id] = 'o'
+  store.gameBoard[store.id] = 'O'
 
   // const gameDisplay = (`
   //   <p>o</p>
   //   `)
   // $(store.id).innherHTML = gameDisplay
-  $('#' + store.id).text('o')
+  $('#' + store.id).text('O')
 
   // $('#content').text('Input Val Success')
-  $('#content').text('Input O Success')
+  $('#content').text('')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }

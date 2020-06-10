@@ -63,7 +63,7 @@ const onDeleteGame = function (event) {
 
 const onInputVal = function (event) {
   let over
-  const data = createForm(event)
+  // const data = createForm(event)
 
   // console.log(data)
 
@@ -71,19 +71,29 @@ const onInputVal = function (event) {
   const button = document.getElementById('game-display')
   // console.log(button)
   // console.log(data)
-
   button.onclick = function (event) {
-
     // console.log(store.gameBoard)
     // console.log(event)
 
     over = !(store.gameBoard.some(i => i === ''))
-    // console.log(over)
 
-    if (checkWin()) {
-      console.log(store.winner)
+    // console.log(over)
+    const xWins = checkWin('X')
+    const oWins = checkWin('O')
+
+    if (xWins || oWins) {
+      for (let i = 0; i < 9; i++) {
+        $('#' + i).text(store.winner)
+      }
+      // console.log(store.winner)
       $('#content').text(store.winner + ' WINS')
+      alert(store.winner + ' WINS')
       over = true
+      if (store.winner === 'X') {
+        api.inputValX(over)
+      } else {
+        api.inputValO(over)
+      }
     }
 
     const id = event.target.id
@@ -93,18 +103,22 @@ const onInputVal = function (event) {
     } else if (store.gameBoard[id] !== '') {
       alert('CANNOT MAKE THAT MOVE')
     } else {
+      if (xWins) {
+
+      }
+
       store.id = id
       //
       // console.log(event.target.id)
       // console.log(store)
 
       if (store.count % 2 === 0) {
-        api.inputValX(data, over)
+        api.inputValX(over)
           .then(ui.inputValSuccessX)
           .catch(ui.inputValFailureX)
       } else {
       // if (store.count % 2 !== 0) {
-        api.inputValO(data, over)
+        api.inputValO(over)
           .then(ui.inputValSuccessO)
           .catch(ui.inputValFailureO)
       }
@@ -113,42 +127,42 @@ const onInputVal = function (event) {
   }
 }
 
-const checkWin = function () {
+const checkWin = function (winner) {
   const game = store.gameBoard
   // const over = (store.gameBoard.some(i => i === 'x'))
   // if (!over) {
   // const id = store.id
 
   // check horizontal winners
-  if ((game[0] === 'x') && (game[1] === 'x') && (game[2] === 'x')) {
-    store.winner = 'x'
+  if ((game[0] === winner) && (game[1] === winner) && (game[2] === winner)) {
+    store.winner = winner
     return true
-  } else if ((game[3] === 'x') && (game[4] === 'x') && (game[5] === 'x')) {
-    store.winner = 'x'
+  } else if ((game[3] === winner) && (game[4] === winner) && (game[5] === winner)) {
+    store.winner = winner
     return true
-  } else if ((game[6] === 'x') && (game[7] === 'x') && (game[8] === 'x')) {
-    store.winner = 'x'
+  } else if ((game[6] === winner) && (game[7] === winner) && (game[8] === winner)) {
+    store.winner = winner
     return true
   }
 
   // check vertical winners
-  if ((game[0] === 'x') && (game[3] === 'x') && (game[6] === 'x')) {
-    store.winner = 'x'
+  if ((game[0] === winner) && (game[3] === winner) && (game[6] === winner)) {
+    store.winner = winner
     return true
-  } else if ((game[1] === 'x') && (game[4] === 'x') && (game[7] === 'x')) {
-    store.winner = 'x'
+  } else if ((game[1] === winner) && (game[4] === winner) && (game[7] === winner)) {
+    store.winner = winner
     return true
-  } else if ((game[2] === 'x') && (game[5] === 'x') && (game[8] === 'x')) {
-    store.winner = 'x'
+  } else if ((game[2] === winner) && (game[5] === winner) && (game[8] === winner)) {
+    store.winner = winner
     return true
   }
 
   // check diagonal winners
-  if ((game[0] === 'x') && (game[4] === 'x') && (game[8] === 'x')) {
-    store.winner = 'x'
+  if ((game[0] === winner) && (game[4] === winner) && (game[8] === winner)) {
+    store.winner = winner
     return true
-  } else if ((game[2] === 'x') && (game[4] === 'x') && (game[6] === 'x')) {
-    store.winner = 'x'
+  } else if ((game[2] === winner) && (game[4] === winner) && (game[6] === winner)) {
+    store.winner = winner
     return true
   }
 

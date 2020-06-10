@@ -75,9 +75,8 @@ const deleteGame = function (data) {
   })
 }
 
-const inputValX = function (data, over) {
+const inputValX = function (over) {
   // console.log('IN API')
-  // console.log(store)
   return $.ajax({
     method: 'PATCH',
     url: config.apiUrl + '/games/' + store.game._id,
@@ -96,7 +95,7 @@ const inputValX = function (data, over) {
   })
 }
 
-const inputValO = function (data, over) {
+const inputValO = function (over) {
   // console.log('IN API')
   // console.log(store)
   return $.ajax({
