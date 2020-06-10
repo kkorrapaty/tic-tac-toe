@@ -64,7 +64,7 @@ const onDeleteGame = function (event) {
 const onInputVal = function () {
   // const data = createForm(event)
 
-  console.log(store)
+  // console.log(store)
 
   // let id
   const button = document.getElementById('game-display')
@@ -85,12 +85,14 @@ const onInputVal = function () {
         $('#' + i).text(store.winner)
       }
       // console.log(store.winner)
-      $('#content').text(store.winner + ' WINS')
-      alert(store.winner + ' WINS')
       over = true
       if (store.winner === 'x') {
+        $('#content').text('X WINS')
+        alert('X WINS')
         api.inputValX(over)
       } else {
+        $('#content').text('O WINS')
+        alert('O WINS')
         api.inputValO(over)
       }
     }

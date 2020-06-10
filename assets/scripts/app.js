@@ -8,6 +8,10 @@ const eventsGame = require('./game/events')
 // require('./example')
 
 $(() => {
+  $('#sign-up-sec').hide()
+  // $('#sign-in-sec').hide()
+  $('#decide').on('click', events.onDecide)
+
   $('#sign-up').on('submit', events.onSignUp)
   $('#sign-in').on('submit', events.onSignIn)
 

@@ -120,7 +120,7 @@ const showGameSuccess = function (response) {
   // console.log('IN UI')
   // console.log(response)
   $('#content').text('')
-  console.log(response.game)
+  // console.log(response.game)
 
   $('#game-display').show()
   for (let i = 0; i < 9; i++) {
