@@ -103,10 +103,6 @@ const onInputVal = function (event) {
     } else if (store.gameBoard[id] !== '') {
       alert('CANNOT MAKE THAT MOVE')
     } else {
-      if (xWins) {
-
-      }
-
       store.id = id
       //
       // console.log(event.target.id)

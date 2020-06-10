@@ -164,7 +164,8 @@ const inputValSuccessX = function (response) {
   $('#' + store.id).text('X')
 
   // $('#content').text('Input Val Success')
-  $('#content').text('')
+  // $('#content').text('')
+  $('#content').text('O\'s TURN')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -189,7 +190,8 @@ const inputValSuccessO = function (response) {
   $('#' + store.id).text('O')
 
   // $('#content').text('Input Val Success')
-  $('#content').text('')
+  // $('#content').text('')
+  $('#content').text('X\'s TURN')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
