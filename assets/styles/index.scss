@@ -62,9 +62,17 @@ body {
 
   user-select: none;
 
+  &:nth-child(3n) {
+    border-right: 0;
+  }
+
+  &:nth-last-child(-1n + 3) {
+    border-bottom: 0;
+  }
+
   &:hover {
-    // Set the background color to a light blue
-    background-color: LightSkyBlue;
+    // Set the background color to a blue
+    background-color: transparentize($underline, .2);
   }
 }
 
