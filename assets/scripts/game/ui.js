@@ -1,6 +1,6 @@
 'use strict'
 const store = require('../store')
-const eventsGame = require('./events')
+// const eventsGame = require('./events')
 
 const createGameSuccess = function (response) {
   // console.log('Inside UI:')
@@ -24,6 +24,7 @@ const createGameSuccess = function (response) {
   // console.log(store.game.cells)
 
   $('#game-display').show()
+  $('#over').hide()
 }
 
 const createGameFailure = function () {
@@ -128,10 +129,16 @@ const showGameSuccess = function (response) {
   }
 
   if (!response.game[0].over) {
-    $('#show-games').text('Game is Not Over: Keep Playing!')
+    $('#over').text('Game is Not Over: Keep Playing!')
     store.gameBoard = response.game[0].cells
     store.gameBoard.oldId = response.game[0]._id
     store.count = 0
+
+    console.log('gameBoard')
+    console.log(store.gameBoard)
+    console.log('Old id')
+    console.log(store.gameBoard.oldId)
+
     store.gameBoard.forEach((i) => {
       if (i === 'x') {
         store.count++
@@ -144,12 +151,14 @@ const showGameSuccess = function (response) {
     // store.game._id = response.game[0]._id
     // const button = document.getElementById('game-display')
     // button.on('click', eventsGame.onInputVal)
-    eventsGame.onInputVal()
+
+    // eventsGame.onInputVal()
   } else {
-    $('#show-games').text('Game is Over!')
+    $('#over').text('Game is Over!')
   }
 
   // $('#content').text('Show Game Success')
+  $('#over').show()
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 }
@@ -175,8 +184,8 @@ const deleteGameFailure = function () {
 }
 
 const inputValSuccessX = function (response) {
-  // console.log('Inside Success X')
-  // console.log(response)
+  console.log('Inside Success X')
+  console.log(response)
   // console.log(store.id)
   store.count += 1
   store.gameBoard[store.id] = 'x'

@@ -78,6 +78,8 @@ const signOutSuccess = function (data) {
   // $('#sign-up-sec').show()
   $('#sign-in-sec').show()
 
+  $('#over').hide()
+
   $('#decide').show()
 
   $('#email-content').hide()

@@ -63,7 +63,7 @@ const onDeleteGame = function (event) {
 
 const onInputVal = function () {
   // const data = createForm(event)
-
+  let over
   // console.log(store)
 
   // let id
@@ -73,29 +73,29 @@ const onInputVal = function () {
   button.onclick = function (event) {
     // console.log(store.gameBoard)
     // console.log(event)
-    let over
     over = !(store.gameBoard.some(i => i === ''))
 
+    over = getWinner(over)
     // console.log(over)
     const xWins = checkWin('x')
     const oWins = checkWin('o')
-
-    if (xWins || oWins) {
-      for (let i = 0; i < 9; i++) {
-        $('#' + i).text(store.winner)
-      }
-      // console.log(store.winner)
-      over = true
-      if (store.winner === 'x') {
-        $('#content').text('X WINS')
-        alert('X WINS')
-        api.inputValX(over)
-      } else {
-        $('#content').text('O WINS')
-        alert('O WINS')
-        api.inputValO(over)
-      }
-    }
+    //
+    // if (xWins || oWins) {
+    //   for (let i = 0; i < 9; i++) {
+    //     $('#' + i).text(store.winner)
+    //   }
+    //   // console.log(store.winner)
+    //   over = true
+    //   if (store.winner === 'x') {
+    //     $('#content').text('X WINS')
+    //     alert('X WINS')
+    //     api.inputValX(over)
+    //   } else {
+    //     $('#content').text('O WINS')
+    //     alert('O WINS')
+    //     api.inputValO(over)
+    //   }
+    // }
 
     const id = event.target.id
 
@@ -126,6 +126,29 @@ const onInputVal = function () {
     }
     // console.log(store.gameBoard)
   }
+}
+
+const getWinner = function (over) {
+  const xWins = checkWin('x')
+  const oWins = checkWin('o')
+
+  if (xWins || oWins) {
+    for (let i = 0; i < 9; i++) {
+      $('#' + i).text(store.winner)
+    }
+    // console.log(store.winner)
+    over = true
+    if (store.winner === 'x') {
+      $('#content').text('X WINS')
+      alert('X WINS')
+      api.inputValX(over)
+    } else {
+      $('#content').text('O WINS')
+      alert('O WINS')
+      api.inputValO(over)
+    }
+  }
+  return over
 }
 
 const checkWin = function (winner) {
