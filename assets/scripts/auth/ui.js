@@ -10,6 +10,7 @@ const signUpSuccess = function (response) {
   $('#sign-in-sec').show()
 
   $('#decide').hide()
+  // $('#decide').removeClass().addClass('decide')
 
   $('#content').text('Sign Up Successful: Please Sign In')
 }
@@ -28,6 +29,7 @@ const signInSuccess = function (response) {
 
   $('#email-content').show()
   $('#email-content').text(`You are signed in as ${response.user.email}`)
+  $('#email-content').removeClass().addClass('email')
   $('#content').text('')
   // $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -81,8 +83,11 @@ const signOutSuccess = function (data) {
   $('#over').hide()
 
   $('#decide').show()
+  $('#decide').removeClass().addClass('decide')
 
   $('#email-content').hide()
+
+  $('#game-output').hide()
 
   $('#index-game').hide()
   $('#create-game').hide()

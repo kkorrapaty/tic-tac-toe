@@ -17,6 +17,8 @@
       <section id='content'></section>
 
       <main>
+        <img src="./assets/imgs/tic-tac-toe.jpg" alt="Tic-Tac-Toe">
+
         <section id='sign-up-sec' class="sect">
           <h2>Sign Up</h2>
           <form id='sign-up'>
@@ -36,7 +38,7 @@
           </form>
         </section>
 
-        <section id='decide'>
+        <section id='decide' class='decide'>
           <button type="button">Don't Have An Account? Sign Up</button>
         </section>
 
@@ -58,14 +60,16 @@
           </ul>
         </section>
 
-        <section>
-          <button type="button" id='create-game'>CREATE GAME</button>
-        </section>
+        <section class="game-buttons">
+          <section>
+            <button type="button" id='create-game'>CREATE GAME</button>
+          </section>
 
-        <section id='index-game'>
-          <button type="button" id='all-games'>SHOW GAMES</button>
-          <button type="button" id="gameOverTrue">Finished Games</button>
-          <button type="button" id="gameOverFalse">UnFinished Games</button>
+          <section id='index-game'>
+            <button type="button" id='all-games'>SHOW GAMES</button>
+            <button type="button" id="gameOverTrue">Finished Games</button>
+            <button type="button" id="gameOverFalse">UnFinished Games</button>
+          </section>
         </section>
 
         <section>
@@ -81,6 +85,8 @@
             <button type="submit">Delete Specific Game</button>
           </form>
         </section>
+
+        <section id="game-output"></section>
 
         <section id="game-display">
           <div class="container">
@@ -101,7 +107,7 @@
         </section>
 
         <section id="over"></section>
-        <section id="show-games"></section>
+        <section id="show-games" class="container"></section>
 
       </main>
 

@@ -3,7 +3,7 @@
 $underline: blue;
 $line: green;
 $alt-color: $cyan;
-$body-bg-color: $gray-200;
+$body-bg-color: black;
 $font-color: $light;
 
 body {
@@ -12,7 +12,7 @@ body {
 
 @keyframes glow {
   0% {
-    text-shadow:  0 0 10px gray;
+    text-shadow:  0 0 10px lightblue;
   }
 
   15% {
@@ -29,8 +29,26 @@ body {
   }
 }
 
+img {
+  height: 20%;
+  width: 15%;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.email {
+  color: red;
+  text-align: left;
+}
+
+.decide {
+  text-align: center;
+}
+
 .success {
   color: $line;
+  text-align: center;
 }
 
 .failure {
@@ -72,7 +90,7 @@ body {
 
   &:hover {
     // Set the background color to a blue
-    background-color: transparentize($underline, .2);
+    background-color: transparentize(lighten($underline, 40%), .1);
   }
 }
 
@@ -91,16 +109,22 @@ body {
 }
 
 h1 {
+  padding: 50px;
   animation: glow 3s infinite;
   color: $underline;
   line-height: 90px;
   text-align: center;
+  font-size: 80px;
   text-decoration: underline overline wavy #4169E1;
   //text-shadow: 0 8px 6px #778899;
 }
 
 
 h2 {
+  margin: 0;
+  padding: 30px auto;
+
+  font-size: 40px;
   text-decoration: overline;
   text-decoration-color: $line;
 }
@@ -115,7 +139,8 @@ h3 {
 }
 
 form {
-  font-size: 12px;
+  text-align: center;
+  font-size: 18px;
 }
 
 button {
@@ -123,11 +148,37 @@ button {
   font-size: 15px;
 }
 
+.game-buttons {
+  text-align: center;
+}
+
 .sect {
+  color: white;
+  text-align: center;
+
   input {
     margin: 10px auto;
     width: 20%;
   }
+}
+
+.container {
+
+  &.show-games {
+    color: lightblue;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-grow: 5;
+  }
+}
+
+.over {
+  text-decoration: underline;
+  color: green;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 ul {

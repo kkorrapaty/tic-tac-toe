@@ -1,6 +1,8 @@
 'use strict'
 const store = require('../store')
 
+// const winner = require('./winner')
+
 const api = require('./api')
 const ui = require('./ui')
 
@@ -61,91 +63,114 @@ const onDeleteGame = function (event) {
     .catch(ui.deleteGameFailure)
 }
 
-const onInputVal = function () {
+const onInputVal = function (event) {
   // const data = createForm(event)
   let over
   // console.log(store)
 
   // let id
-  const button = document.getElementById('game-display')
+  // const button = document.getElementById('game-display')
   // console.log(button)
   // console.log(data)
-  button.onclick = function (event) {
-    // console.log(store.gameBoard)
-    // console.log(event)
-    over = !(store.gameBoard.some(i => i === ''))
+  // button.onclick = function (event) {
+  // console.log(store.gameBoard)
+  // console.log(event)
+  over = !(store.gameBoard.some(i => i === ''))
+  //
+  // over = getWinner(over)
+  // // console.log(over)
+  // const xWins = checkWin('x')
+  // const oWins = checkWin('o')
+  //
+  // if (xWins || oWins) {
+  //   for (let i = 0; i < 9; i++) {
+  //     $('#' + i).text(store.winner)
+  //   }
+  //   // console.log(store.winner)
+  //   over = true
+  //   if (store.winner === 'x') {
+  //     $('#content').text('X WINS')
+  //     alert('X WINS')
+  //     api.inputValX(over)
+  //   } else {
+  //     $('#content').text('O WINS')
+  //     alert('O WINS')
+  //     api.inputValO(over)
+  //   }
+  // }
 
-    over = getWinner(over)
-    // console.log(over)
-    const xWins = checkWin('x')
-    const oWins = checkWin('o')
-    //
-    // if (xWins || oWins) {
-    //   for (let i = 0; i < 9; i++) {
-    //     $('#' + i).text(store.winner)
-    //   }
-    //   // console.log(store.winner)
-    //   over = true
-    //   if (store.winner === 'x') {
-    //     $('#content').text('X WINS')
-    //     alert('X WINS')
-    //     api.inputValX(over)
-    //   } else {
-    //     $('#content').text('O WINS')
-    //     alert('O WINS')
-    //     api.inputValO(over)
-    //   }
-    // }
+  const id = event.target.id
 
-    const id = event.target.id
+  // over = winner.getWinner(over)
+  over = getWinner(over)
 
-    if (over) {
-      alert('GAME OVER')
-      if ((!xWins) && (!oWins)) {
-        api.inputValX(over)
-        $('#content').text('Its A Draw')
-      }
-    } else if (store.gameBoard[id] !== '') {
-      alert('CANNOT MAKE THAT MOVE')
-    } else {
-      store.id = id
-      //
-      // console.log(event.target.id)
-      // console.log(store)
+  // const xWins = winner.checkWin('x')
+  // const oWins = winner.checkWin('o')
 
-      if (store.count % 2 === 0) {
-        api.inputValX(over)
-          .then(ui.inputValSuccessX)
-          .catch(ui.inputValFailureX)
-      } else {
-      // if (store.count % 2 !== 0) {
-        api.inputValO(over)
-          .then(ui.inputValSuccessO)
-          .catch(ui.inputValFailureO)
-      }
+  const xWins = checkWin('x')
+  const oWins = checkWin('o')
+
+  if (over) {
+    // alert('GAME OVER')
+    $('#game-output').text('GAME OVER')
+    if ((!xWins) && (!oWins)) {
+      api.inputValX(over)
+      $('#game-output').text('Its A Draw')
     }
-    // console.log(store.gameBoard)
-  }
-}
+  } else if (store.gameBoard[id] !== '') {
+    // alert('CANNOT MAKE THAT MOVE')
+    $('#game-output').text('CANNOT MAKE THAT MOVE')
+  } else {
+    store.id = id
+    //
+    // console.log(event.target.id)
+    // console.log(store)
 
+    // console.log(over)
+
+    if (store.count % 2 === 0) {
+      // over = winner.getWinner(over)
+      over = getWinner(over)
+      api.inputValX(over)
+        .then(ui.inputValSuccessX)
+        .catch(ui.inputValFailureX)
+    } else {
+    // if (store.count % 2 !== 0) {
+      // over = winner.getWinner(over)
+      over = getWinner(over)
+      api.inputValO(over)
+        .then(ui.inputValSuccessO)
+        .catch(ui.inputValFailureO)
+    }
+  }
+  // console.log(store.gameBoard)
+// }
+}
+//
 const getWinner = function (over) {
+  // console.log('INSIDE GETWINNER')
   const xWins = checkWin('x')
   const oWins = checkWin('o')
 
   if (xWins || oWins) {
+    // console.log('INSIDE GETWINNER X || O')
     for (let i = 0; i < 9; i++) {
       $('#' + i).text(store.winner)
     }
     // console.log(store.winner)
     over = true
     if (store.winner === 'x') {
-      $('#content').text('X WINS')
-      alert('X WINS')
+      $('#game-output').text('X WINS')
+      // alert('X WINS')
       api.inputValX(over)
+        .then(ui.inputValSuccessX)
+        .catch(ui.inputValFailureX)
     } else {
-      $('#content').text('O WINS')
-      alert('O WINS')
+      $('#game-output').text('O WINS')
+      // alert('O WINS')
       api.inputValO(over)
+        .then(ui.inputValSuccessO)
+        .catch(ui.inputValFailureO)
     }
   }
   return over
@@ -153,6 +178,8 @@ const getWinner = function (over) {
 
 const checkWin = function (winner) {
   const game = store.gameBoard
+  // console.log('GameBoard')
+  // console.log(game)
   // const over = (store.gameBoard.some(i => i === 'x'))
   // if (!over) {
   // const id = store.id

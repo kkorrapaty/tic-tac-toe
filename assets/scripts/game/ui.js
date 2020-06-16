@@ -1,5 +1,7 @@
 'use strict'
 const store = require('../store')
+
+const winner = require('./winner')
 // const eventsGame = require('./events')
 
 const createGameSuccess = function (response) {
@@ -10,6 +12,7 @@ const createGameSuccess = function (response) {
   store.count = 0
 
   $('#content').text('')
+  $('#game-output').text('X\'s TURN')
 
   for (let i = 0; i < 9; i++) {
     $('#' + i).text('')
@@ -17,7 +20,7 @@ const createGameSuccess = function (response) {
 
   $('form').trigger('reset')
   // $('#content').text('Game Made Success')
-  // $('#content').removeClass().addClass('success')
+  $('#game-output').removeClass().addClass('success')
 
   store.game = response.game
   store.gameBoard = store.game.cells
@@ -52,6 +55,7 @@ const indexGameSuccess = function (response) {
 
   $('form').trigger('reset')
   $('#show-games').show()
+  $('#show-games').addClass('show-games')
   // $('#content').text('Game Index Success')
   $('#content').removeClass().addClass('success')
 }
@@ -78,7 +82,7 @@ const gameFinSuccess = function (response) {
   })
 
   $('#show-games').html(gameDisplay)
-
+  $('#show-games').addClass('show-games')
   // $('#content').text('Game Finished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -106,7 +110,7 @@ const gameUnfinSuccess = function (response) {
   })
 
   $('#show-games').html(gameDisplay)
-
+  $('#show-games').addClass('show-games')
   // $('#content').text('Game Unfinished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -134,10 +138,10 @@ const showGameSuccess = function (response) {
     store.gameBoard.oldId = response.game[0]._id
     store.count = 0
 
-    console.log('gameBoard')
-    console.log(store.gameBoard)
-    console.log('Old id')
-    console.log(store.gameBoard.oldId)
+    // console.log('gameBoard')
+    // console.log(store.gameBoard)
+    // console.log('Old id')
+    // console.log(store.gameBoard.oldId)
 
     store.gameBoard.forEach((i) => {
       if (i === 'x') {
@@ -158,6 +162,7 @@ const showGameSuccess = function (response) {
   }
 
   // $('#content').text('Show Game Success')
+  $('#over').removeClass().addClass('over')
   $('#over').show()
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -184,8 +189,8 @@ const deleteGameFailure = function () {
 }
 
 const inputValSuccessX = function (response) {
-  console.log('Inside Success X')
-  console.log(response)
+  // console.log('Inside Success X')
+  // console.log(response)
   // console.log(store.id)
   store.count += 1
   store.gameBoard[store.id] = 'x'
@@ -195,10 +200,23 @@ const inputValSuccessX = function (response) {
   //   `)
   $('#' + store.id).text('x')
 
+  const over = !(store.gameBoard.some(i => i === ''))
+  //
+  // console.log('Inside inputX')
+  // console.log(winner.getWinner(over))
+
+  if (over) {
+    $('#game-output').text('GAME OVER! Its a Draw')
+  } else if (winner.getWinner(over)) {
+    $('#game-output').text('X WINS')
+  } else {
+    $('#game-output').text('O\'s TURN')
+  }
+
   // $('#content').text('Input Val Success')
   // $('#content').text('')
-  $('#content').text('O\'s TURN')
-  $('#content').removeClass().addClass('success')
+  // $('#game-output').text('O\'s TURN')
+  $('#game-output').removeClass().addClass('success')
   $('form').trigger('reset')
 }
 
@@ -221,10 +239,20 @@ const inputValSuccessO = function (response) {
   // $(store.id).innherHTML = gameDisplay
   $('#' + store.id).text('o')
 
+  const over = !(store.gameBoard.some(i => i === ''))
+
+  if (over) {
+    $('#game-output').text('GAME OVER! Its a Draw')
+  } else if (winner.getWinner(over)) {
+    $('#game-output').text('O WINS')
+  } else {
+    $('#game-output').text('X\'s TURN')
+  }
+
   // $('#content').text('Input Val Success')
   // $('#content').text('')
-  $('#content').text('X\'s TURN')
-  $('#content').removeClass().addClass('success')
+  // $('#game-output').text('X\'s TURN')
+  $('#game-output').removeClass().addClass('success')
   $('form').trigger('reset')
 }
 
