@@ -12,8 +12,7 @@ The creation of this application was an incredible experience, in which I went t
 4. As a player, I want to see how many total games I have won and lost
 
 ### WIREFRAME
-![WireFrame]
-(public/WireFrameProject1.pdf)
+[WireFrame](public/WireFrameProject1.pdf)
 
 ### TECHNOLOGIES
 * JavaScript
