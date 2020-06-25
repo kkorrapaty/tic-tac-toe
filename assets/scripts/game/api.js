@@ -77,8 +77,11 @@ const deleteGame = function (data) {
 
 const inputValX = function (over) {
   // console.log('IN API')
+  // console.log(store.game)
+  // console.log(store.gameBoard.oldId)
+  // console.log(store.game._id)
   let id
-  if (store.game === undefined) {
+  if (store.gameBoard.oldId !== undefined) {
     id = store.gameBoard.oldId
   } else {
     id = store.game._id
@@ -105,7 +108,7 @@ const inputValO = function (over) {
   // console.log('IN API')
   // console.log(store)
   let id
-  if (store.game === undefined) {
+  if (store.gameBoard.oldId !== undefined) {
     id = store.gameBoard.oldId
   } else {
     id = store.game._id
