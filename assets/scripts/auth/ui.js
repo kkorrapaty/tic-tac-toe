@@ -48,6 +48,7 @@ const signInSuccess = function (response) {
   $('#change-pass').hide() // ...but keep form part hidden until 'CHANGE PASSWORD' is clicked
 
   $('#delete-game-form').show()
+  store.gameBoard.oldId = undefined
 }
 
 const signInFailure = function (response) {

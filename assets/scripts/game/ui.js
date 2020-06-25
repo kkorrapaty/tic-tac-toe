@@ -10,6 +10,7 @@ const createGameSuccess = function (response) {
 
   store.gameBoard = []
   store.count = 0
+  store.gameBoard.oldId = undefined
 
   $('#content').text('')
   $('#game-output').text('X\'s TURN')
@@ -84,6 +85,7 @@ const gameFinSuccess = function (response) {
 
   $('#show-games').html(gameDisplay)
   $('#show-games').addClass('show-games')
+  $('#show-games').show()
   // $('#content').text('Game Finished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -112,6 +114,7 @@ const gameUnfinSuccess = function (response) {
 
   $('#show-games').html(gameDisplay)
   $('#show-games').addClass('show-games')
+  $('#show-games').show()
   // $('#content').text('Game Unfinished Success')
   $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
@@ -132,13 +135,14 @@ const showGameSuccess = function (response) {
   for (let i = 0; i < 9; i++) {
     $('#' + i).text(response.game[0].cells[i])
   }
+  store.gameBoard = response.game[0].cells
+  store.gameBoard.oldId = response.game[0]._id
 
   if (!response.game[0].over) {
     $('#over').text('Game is Not Over: Keep Playing!')
     $('#game-output').removeClass().addClass('success')
     $('#game-output').show()
-    store.gameBoard = response.game[0].cells
-    store.gameBoard.oldId = response.game[0]._id
+    // store.gameBoard = response.game[0].cells
     store.count = 0
 
     store.gameBoard.forEach((i) => {
@@ -148,11 +152,22 @@ const showGameSuccess = function (response) {
         store.count++
       }
     })
+    if (store.count % 2 === 0) {
+      $('#game-output').text('X\'s TURN')
+    } else {
+      $('#game-output').text('O\'s TURN')
+    }
   } else {
+    if (winner.checkWin('x')) {
+      $('#game-output').text('X WINS')
+    } else if (winner.checkWin('o')) {
+      $('#game-output').text('O WINS')
+    }
+    // store.gameBoard.oldId = undefined
     $('#over').text('Game is Over!')
   }
 
-  $('#game-output').show()
+  $('#game-output').show().removeClass().addClass('success')
   // $('#content').text('Show Game Success')
   $('#over').removeClass().addClass('over')
   $('#over').show()
@@ -181,8 +196,8 @@ const deleteGameFailure = function () {
 }
 
 const inputValSuccessX = function (response) {
-  console.log('INSIDE UI')
-  console.log(response)
+  // console.log('INSIDE UI')
+  // console.log(response)
   store.count += 1
   store.gameBoard[store.id] = 'x'
 
@@ -190,10 +205,10 @@ const inputValSuccessX = function (response) {
 
   const over = !(store.gameBoard.some(i => i === ''))
 
-  if (over) {
-    $('#game-output').text('GAME OVER! Its a Draw')
-  } else if (winner.getWinner(over)) {
+  if (winner.getWinner(over)) {
     $('#game-output').text('X WINS')
+  } else if (over) {
+    $('#game-output').text('GAME OVER! Its a Draw')
   } else {
     $('#game-output').text('O\'s TURN')
   }
@@ -216,10 +231,10 @@ const inputValSuccessO = function (response) {
 
   const over = !(store.gameBoard.some(i => i === ''))
 
-  if (over) {
-    $('#game-output').text('GAME OVER! Its a Draw')
-  } else if (winner.getWinner(over)) {
+  if (winner.getWinner(over)) {
     $('#game-output').text('O WINS')
+  } else if (over) {
+    $('#game-output').text('GAME OVER! Its a Draw')
   } else {
     $('#game-output').text('X\'s TURN')
   }
