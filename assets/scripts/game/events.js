@@ -64,41 +64,7 @@ const onDeleteGame = function (event) {
 }
 
 const onInputVal = function (event) {
-  // const data = createForm(event)
-  let over
-  // console.log(store)
-
-  // let id
-  // const button = document.getElementById('game-display')
-  // console.log(button)
-  // console.log(data)
-  // button.onclick = function (event) {
-  // console.log(store.gameBoard)
-  // console.log(event)
-  over = !(store.gameBoard.some(i => i === ''))
-  //
-  // over = getWinner(over)
-  // // console.log(over)
-  // const xWins = checkWin('x')
-  // const oWins = checkWin('o')
-  //
-  // if (xWins || oWins) {
-  //   for (let i = 0; i < 9; i++) {
-  //     $('#' + i).text(store.winner)
-  //   }
-  //   // console.log(store.winner)
-  //   over = true
-  //   if (store.winner === 'x') {
-  //     $('#content').text('X WINS')
-  //     alert('X WINS')
-  //     api.inputValX(over)
-  //   } else {
-  //     $('#content').text('O WINS')
-  //     alert('O WINS')
-  //     api.inputValO(over)
-  //   }
-  // }
-
+  let over = !(store.gameBoard.some(i => i === ''))
   const id = event.target.id
 
   // over = winner.getWinner(over)
@@ -111,22 +77,15 @@ const onInputVal = function (event) {
   const oWins = checkWin('o')
 
   if (over) {
-    // alert('GAME OVER')
     $('#game-output').text('GAME OVER')
     if ((!xWins) && (!oWins)) {
       api.inputValX(over)
       $('#game-output').text('Its A Draw')
     }
   } else if (store.gameBoard[id] !== '') {
-    // alert('CANNOT MAKE THAT MOVE')
     $('#game-output').text('CANNOT MAKE THAT MOVE')
   } else {
     store.id = id
-    //
-    // console.log(event.target.id)
-    // console.log(store)
-
-    // console.log(over)
 
     if (store.count % 2 === 0) {
       // over = winner.getWinner(over)
@@ -143,31 +102,24 @@ const onInputVal = function (event) {
         .catch(ui.inputValFailureO)
     }
   }
-  // console.log(store.gameBoard)
-// }
 }
 //
 const getWinner = function (over) {
-  // console.log('INSIDE GETWINNER')
   const xWins = checkWin('x')
   const oWins = checkWin('o')
 
   if (xWins || oWins) {
-    // console.log('INSIDE GETWINNER X || O')
     for (let i = 0; i < 9; i++) {
       $('#' + i).text(store.winner)
     }
-    // console.log(store.winner)
     over = true
     if (store.winner === 'x') {
       $('#game-output').text('X WINS')
-      // alert('X WINS')
       api.inputValX(over)
         .then(ui.inputValSuccessX)
         .catch(ui.inputValFailureX)
     } else {
       $('#game-output').text('O WINS')
-      // alert('O WINS')
       api.inputValO(over)
         .then(ui.inputValSuccessO)
         .catch(ui.inputValFailureO)
