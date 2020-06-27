@@ -30,7 +30,7 @@ const signInSuccess = function (response) {
   $('#email-content').show()
   $('#email-content').text(`You are signed in as ${response.user.email}`)
   $('#email-content').removeClass().addClass('email')
-  $('#content').text('')
+  $('#content').hide()
   // $('#content').removeClass().addClass('success')
   $('form').trigger('reset')
 
